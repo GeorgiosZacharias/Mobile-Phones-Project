@@ -24,7 +24,7 @@
     <div class="container register-form">
         <div class="form">
             <div class="note">
-                <p>Registering to our dumbsterfuck of a website :)</p>
+                <p>Registering to our website :)</p>
             </div>
 
             <div class="form-content">
@@ -43,7 +43,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <input type="email" id="email-input" class="form-control" placeholder="E-mail *" name="email"
-                                required="required" />
+                                required="required" onblur="checkEmail()" />
+                            <span id="email-message" style="display:block; margin-top:5px;"></span>
                         </div>
                         <div class="form-group">
                             <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Password *"
@@ -236,6 +237,47 @@
         <!-- Copyright -->
     </footer>
     <script src="main.js"></script>
+    <script>
+        // Real-time email availability checker
+        function checkEmail() {
+            const email = document.getElementById('email-input').value;
+            const message = document.getElementById('email-message');
+            const submitBtn = document.querySelector('input[type="submit"]');
+            
+            // Only check if email field is not empty
+            if (email.length > 0) {
+                // Send AJAX request to check if email exists in database
+                fetch('check_email.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'email=' + encodeURIComponent(email)
+                })
+                .then(response => response.text())
+                .then(data => {
+                    // If email already exists, show error and disable submit button
+                    if (data === 'exists') {
+                        message.textContent = 'This email is already registered';
+                        message.style.color = 'red';
+                        submitBtn.disabled = true;
+                    } else {
+                        // Email is available, show success message and enable submit button
+                        message.textContent = 'Email is available';
+                        message.style.color = 'green';
+                        submitBtn.disabled = false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking email:', error);
+                });
+            } else {
+                // Clear message if email field is empty
+                message.textContent = '';
+                submitBtn.disabled = false;
+            }
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
