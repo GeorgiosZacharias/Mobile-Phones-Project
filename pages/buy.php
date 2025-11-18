@@ -1,8 +1,8 @@
 <?php
-require_once('config.php');
+require_once('../config.php');
 ?>
 <?php      
-    include('loginCon.php');
+    include('../loginCon.php');
 	session_start();
 	if (isset($_SESSION['email'])){ 
 	$orderId=isset($_POST['orderId']);
@@ -33,6 +33,6 @@ require_once('config.php');
         }     
     }
     else{
-        header("Location: LogInPage.php");
+        header("Location: ../LogInPage.php");
     }
 ?>

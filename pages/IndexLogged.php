@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include('../config.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,7 @@ include('config.php');
     <title>Bootstrap Tutorial Sample Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
@@ -17,90 +17,23 @@ include('config.php');
 
 <body>
     <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="index.php">Logo</a>
-        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <?php include("navigation.php"); ?>
+        <a class="navbar-brand" href="/Project/index.php">Logo</a>
+        <?php include("../navigation.php"); ?>
     </nav>
-   
-        <?php
-		  
-          echo '<div class="container">';
-          echo '<div class="table-responsive custom-table-responsive">';
-          echo  ' <table class="table custom-table">';
-		  echo '<h2 class="mb-5">My Orders</h2>';
-          echo   '  <thead>';
-          echo    '   <tr>     '  ;    
-          echo       ' <th scope="col"></th>';		  
-          echo         '<th scope="col">Models</th>';
-		  echo         '<th scope="col">Screen Size</th>';
-		  echo         '<th scope="col">CPU</th>';
-		  echo         '<th scope="col">RAM</th>';
-		  echo         '<th scope="col">Camera</th>';
-		  echo         '<th scope="col">Battery</th>';
-		  echo         '<th scope="col">SAR</th>';
-		  echo         '<th scope="col">Price</th>';
-          echo       ' <th scope="col">Date Of Order</th>';
-		 
 
-
-          echo     ' </tr>';
-          echo   ' </thead>';
-         include('loginCon.php');
-		 $email = $_SESSION["email"];
-         $sql = "SELECT productId,userId,date FROM eshop.orders where(userId=(select userId FROM eshop.users where email='$email'))";
-         $result = mysqli_query($con,$sql);
-		 $resultCheck = mysqli_num_rows($result);
-         if ($resultCheck > 0){
-         while ($row = mysqli_fetch_assoc($result)){
-            $productId = $row["productId"];
-            $sql1 = "SELECT * FROM eshop.mobilephones where productId = '$productId'";
-            $result1 = mysqli_query($con,$sql1);
-            $row1 = mysqli_fetch_assoc($result1);
-           echo    '<tbody>';
-           echo      '<tr scope="row">';
-		   echo        '<td>';	   
-           echo        '<div class="d-flex align-items-center credits"> <img src="', $row1['photoURL'], '" height = "100px"width="80px"></div>';
-           echo        '</td>';
-           echo        '<td>';	   
-           echo          $row1['model'];
-           echo        '</td>';
-		   echo        '<td>';	   
-           echo          $row1['screenSize'];
-           echo        '</td>';
-           echo         '<td>';
-           echo          $row1['CPU'];
-           echo          '</td>';
-		   echo         '<td>';
-           echo          $row1['RAM'];
-           echo          '</td>';
-		   echo         '<td>';
-           echo          $row1['camera'];
-           echo          '</td>';
-		   echo         '<td>';
-           echo          $row1['battery'];
-           echo          '</td>';
-		   echo         '<td>';
-           echo          $row1['SAR'];
-           echo          '</td>';
-		    echo         '<td>';
-           echo           $row1['price'],'€ ';
-           echo          '</td>';
-           echo         '<td>';
-           echo           $row['date'];
-           echo          '</td>';
-           echo       '</tr> ';
-           echo     '</tbody>';
-		 }
-         } 
-         echo   '</table>';
-         echo '</div>';
-         echo  '</div>';?>
-		 
-     
+    <header class="page-header header container-fluid">
+        <div class="overlay">
+            <div class="description">
+                <h1>Welcome to our website which provide a huge variety of mobile phones!</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum quam odio, quis placerat
+                    ante luctus eu. Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis. Suspendisse
+                    consectetur mi id libero fringilla, in pharetra sem ullamcorper.</p>
+            
+            </div>
+        </div>
 
     </header>
+    <!-- Footer -->
     <footer class="bg-dark text-center text-white">
         <!-- Grid container -->
         <div class="container p-4">
@@ -192,7 +125,7 @@ include('config.php');
                                 <a href="#!" class="text-white">About</a>
                             </li>
                             <li>
-                                <a href="#ContactUs.php" class="text-white">Contact us</a>
+                                <a href="#ContactUs.html" class="text-white">Contact us</a>
                             </li>
                             <li>
                                 <a href="#!" class="text-white">FAQ</a>
@@ -237,7 +170,8 @@ include('config.php');
         </div>
         <!-- Copyright -->
     </footer>
-    <script src="main.js"></script>
+    <!-- Footer -->
+    <script src="../main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"

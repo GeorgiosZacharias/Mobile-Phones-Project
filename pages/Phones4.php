@@ -6,7 +6,7 @@
     <title>Bootstrap Tutorial Sample Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
@@ -14,11 +14,11 @@
 
 <body>
     <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="index.php">Logo</a>
+        <a class="navbar-brand" href="/Project/index.php">Logo</a>
         <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <?php include("navigation.php"); ?>
+        <?php include("../navigation.php"); ?>
     </nav>
 
     <header class="page-header header2 container-fluid">
@@ -33,8 +33,8 @@
                 </div>
                 <div class="row mt-1">
                     <?php
-                    include('loginCon.php');
-                    $sqlget = "Select * from eshop.mobilephones where productId>6 and productId<13 and quantity >0";
+                    include('../loginCon.php');
+                    $sqlget = "Select * from eshop.mobilephones where productId>18 and productId<25 and quantity >0";
                     $sqldata = mysqli_query($con, $sqlget);
                     while ($row = mysqli_fetch_array($sqldata, MYSQLI_ASSOC)) {
                         echo '<div class="col-md-4">';
@@ -60,14 +60,12 @@
                 <div class="d-flex justify-content-end text-right mt-2">
                     <nav>
                         <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="Phones.php" aria-label="Previous"><span
+                            <li class="page-item"><a class="page-link" href="Phones3.php" aria-label="Previous"><span
                                         aria-hidden="true">«</span></a></li>
                             <li class="page-item"><a class="page-link" href="Phones.php">1</a></li>
                             <li class="page-item"><a class="page-link" href="Phones2.php">2</a></li>
                             <li class="page-item"><a class="page-link" href="Phones3.php">3</a></li>
                             <li class="page-item"><a class="page-link" href="Phones4.php">4</a></li>
-                            <li class="page-item"><a class="page-link" href="Phones3.php" aria-label="Next"><span
-                                        aria-hidden="true">»</span></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -212,7 +210,7 @@
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
-    <script src="main.js"></script>
+    <script src="../main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
