@@ -24,7 +24,7 @@ require_once('../config.php');
 			$sql3=" UPDATE eshop.mobilephones SET quantity = quantity - 1
               WHERE productId = '$productId'";
 			  $result3 = mysqli_query($con, $sql3);
-            header("Location: MyOrders.php");
+            header("Location: /Project/pages/MyOrders.php");
 			
             exit();
         }  
@@ -33,6 +33,6 @@ require_once('../config.php');
         }     
     }
     else{
-        header("Location: ../LogInPage.php");
+        header("Location: /Project/LogInPage.php");
     }
 ?>

@@ -33,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
         if ($user['UserType'] === "Admin") {
-            header("Location: IndexLogged.php");
+            header("Location: pages/IndexLogged.php");
         } else {
-            header("Location: IndexLogged.php");
+            header("Location: pages/IndexLogged.php");
         }
         exit();
     } else {
