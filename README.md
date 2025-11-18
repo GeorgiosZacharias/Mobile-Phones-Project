@@ -1,4 +1,4 @@
-# E-Shop Project
+# E-Shop Project During my University Studies
 
 A PHP-based e-commerce website for selling mobile phones.
 
@@ -24,9 +24,7 @@ A PHP-based e-commerce website for selling mobile phones.
 5. **Run the project:**
    - Navigate to `http://localhost/Project/`
 
-## Default Admin Credentials
-- Username: `admin`
-- Password: `admin`
+
 
 ## Features
 - Product browsing
