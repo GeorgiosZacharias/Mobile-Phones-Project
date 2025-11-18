@@ -1,0 +1,6 @@
+# Database credentials
+config.php
+loginCon.php
+
+# Database dumps with user data
+eshop.sql
