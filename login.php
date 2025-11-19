@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Login failed - redirect back to login page with error
         $_SESSION['login_error'] = "Invalid email or password. Please try again.";
-        header("Location: LogInPage.php");
+        header("Location: /Project/LogInPage.php");
         exit();
     }
 }

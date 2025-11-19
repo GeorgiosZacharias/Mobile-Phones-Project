@@ -104,7 +104,7 @@
                 <input type="submit" class="btn btn-primary btn-sm" value="Register Now" />
                 </form>
                 <div id="formFooter">
-                    <div class="text-center">Already have an account? <a href="sing-in.html">Sign in</a></div>
+                    <div class="text-center">Already have an account? <a href="LogInPage.php">Sign in</a></div>
                 </div>
             </div>
         </div>
@@ -203,7 +203,7 @@
                                 <a href="#!" class="text-white">About</a>
                             </li>
                             <li>
-                                <a href="#ContactUs.html" class="text-white">Contact us</a>
+                                <a href="pages/ContactUs.php" class="text-white">Contact us</a>
                             </li>
                             <li>
                                 <a href="#!" class="text-white">FAQ</a>

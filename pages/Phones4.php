@@ -164,7 +164,7 @@
                                 <a href="#!" class="text-white">About</a>
                             </li>
                             <li>
-                                <a href="#ContactUs.html" class="text-white">Contact us</a>
+                                <a href="ContactUs.php" class="text-white">Contact us</a>
                             </li>
                             <li>
                                 <a href="#!" class="text-white">FAQ</a>

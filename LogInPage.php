@@ -47,7 +47,7 @@
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <a class="underlineHover" href="Register.html">Not registered?</a>
+                <a class="underlineHover" href="Register.php">Not registered?</a>
             </div>
 
         </div>
@@ -143,7 +143,7 @@
                                 <a href="#!" class="text-white">About</a>
                             </li>
                             <li>
-                                <a href="#ContactUs.html" class="text-white">Contact us</a>
+                                <a href="pages/ContactUs.php" class="text-white">Contact us</a>
                             </li>
                             <li>
                                 <a href="#!" class="text-white">FAQ</a>
