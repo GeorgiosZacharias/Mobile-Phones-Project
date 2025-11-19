@@ -21,6 +21,18 @@
             <ul class="navbar-nav">
                 <?php include("navigation.php"); ?>
     </nav>
+    
+    <?php
+    // Display error message if exists
+    if (isset($_SESSION['register_error'])) {
+        echo '<div class="container mt-3"><div class="alert alert-danger alert-dismissible fade show" role="alert">';
+        echo htmlspecialchars($_SESSION['register_error']);
+        echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+        echo '</div></div>';
+        unset($_SESSION['register_error']);
+    }
+    ?>
+    
     <div class="container register-form">
         <div class="form">
             <div class="note">
@@ -49,16 +61,16 @@
                         <div class="form-group">
                             <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Password *"
                                 class="form-control" type="password" name="password" id="password-input"
-                                onkeydown="verifyPassword()">
-                            <span id="message-password" style="color:red" required="required"> </span>
+                                required="required" onkeydown="verifyPassword()">
+                            <span id="message-password" style="color:red"> </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <input placeholder="Password Confirmation *" class="form-control" type="password"
-                                name="pass-text" id="password-Conf" name="password"
-                                onkeydown="ValidatePasswordConfirm()">
-                            <span id="message-password" style="color:red" required="required"> </span>
+                                name="pass-text" id="password-Conf" required="required"
+                                onkeyup="ValidatePasswordConfirm()">
+                            <span id="message-password-conf" style="color:red"> </span>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Address *" name="address"

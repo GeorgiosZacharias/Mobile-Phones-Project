@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('config.php');
 ?>
 <?php
@@ -9,18 +10,29 @@ if (isset($_POST)) {
 	$lastname 		= $_POST['last_name'];
 	$email 			= $_POST['email'];
 	$password 		= $_POST['password'];
-	$password 		= password_hash($password, PASSWORD_DEFAULT);
+	$passwordConf 	= $_POST['pass-text'];
 	$address        = $_POST['address'];
 	$city           = $_POST['city'];
 	$postalcode     = $_POST['postalcode'];
 	$phonenumber	= $_POST['phonenumber'];
+
+	// Check if passwords match
+	if ($password !== $passwordConf) {
+		$_SESSION['register_error'] = 'Passwords do not match. Please try again.';
+		header("Location: Register.php");
+		exit();
+	}
+
+	// Hash the password after validation
+	$password 		= password_hash($password, PASSWORD_DEFAULT);
 
 	// Check if email already exists (server-side validation)
 	$checkEmail = $db->prepare("SELECT email FROM eshop.users WHERE email = ?");
 	$checkEmail->execute([$email]);
 	
 	if ($checkEmail->rowCount() > 0) {
-		echo '<script>alert("Email already exists. Please use a different email."); window.location.href="Register.php";</script>';
+		$_SESSION['register_error'] = 'Email already exists. Please use a different email.';
+		header("Location: Register.php");
 		exit();
 	}
 
