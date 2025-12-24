@@ -27,9 +27,9 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum quam odio, quis placerat
                     ante luctus eu. Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis. Suspendisse
                     consectetur mi id libero fringilla, in pharetra sem ullamcorper.</p>
-                <button class="btn btn-outline-secondary btn-lg" onclick="location.href = 'LogIn.html';">Sign
+                <button class="btn btn-outline-secondary btn-lg" onclick="location.href = 'LogInPage.php';">Sign
                     In</button>
-                <button class="btn btn-outline-secondary btn-lg" onclick="location.href = 'Register.html';">Sign
+                <button class="btn btn-outline-secondary btn-lg" onclick="location.href = 'Register.php';">Sign
                     Up</button>
             </div>
 
@@ -128,7 +128,7 @@
                                 <a href="#!" class="text-white">About</a>
                             </li>
                             <li>
-                                <a href="#ContactUs.html" class="text-white">Contact us</a>
+                                <a href="pages/ContactUs.php" class="text-white">Contact us</a>
                             </li>
                             <li>
                                 <a href="#!" class="text-white">FAQ</a>

@@ -1,8 +1,8 @@
 <?php
-require_once('config.php');
+require_once('../config.php');
 ?>
 <?php      
-    include('loginCon.php');
+    include('../loginCon.php');
 	session_start();
 	if (isset($_SESSION['email'])){ 
 	$orderId=isset($_POST['orderId']);
@@ -24,7 +24,7 @@ require_once('config.php');
 			$sql3=" UPDATE eshop.mobilephones SET quantity = quantity - 1
               WHERE productId = '$productId'";
 			  $result3 = mysqli_query($con, $sql3);
-            header("Location: MyOrders.php");
+            header("Location: /Project/pages/MyOrders.php");
 			
             exit();
         }  
@@ -33,6 +33,6 @@ require_once('config.php');
         }     
     }
     else{
-        header("Location: LogInPage.php");
+        header("Location: /Project/LogInPage.php");
     }
 ?>

@@ -1,3 +1,6 @@
+<?php
+include('../config.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +9,7 @@
     <title>Bootstrap Tutorial Sample Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
@@ -14,88 +17,88 @@
 
 <body>
     <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="index.php">Logo</a>
+        <a class="navbar-brand" href="/Project/index.php">Logo</a>
         <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <?php include("navigation.php"); ?>
+        <?php include("../navigation.php"); ?>
     </nav>
-    <header class="jumbotron jumbotron-sm page-header header2 container-fluid">
-        <div class="container">
-            <h1 class="h1">
-                Contact us <small>Feel free to contact us</small></h1>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="well well-sm">
-                        <form>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="name">
-                                            Name</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Enter name"
-                                            required="required" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">
-                                            Email Address</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><span
-                                                    class="glyphicon glyphicon-envelope"></span>
-                                            </span>
-                                            <input type="email" class="form-control" id="email"
-                                                placeholder="Enter email" required="required" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="subject">
-                                            Subject</label>
-                                        <select id="subject" name="subject" class="form-control" required="required">
-                                            <option value="na" selected="">Choose One:</option>
-                                            <option value="service">General Customer Service</option>
-                                            <option value="suggestions">Suggestions</option>
-                                            <option value="product">Product Support</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="name">
-                                            Message</label>
-                                        <textarea name="message" id="message" class="form-control" rows="9" cols="25"
-                                            required="required" placeholder="Message"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
-                                        Send Message</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <form>
-                        <legend><span class="glyphicon glyphicon-globe"></span> Our office</legend>
-                        <address>
-                            <strong>Twitter, Inc.</strong><br>
-                            795 Folsom Ave, Suite 600<br>
-                            San Francisco, CA 94107<br>
-                            <abbr title="Phone">
-                                P:</abbr>
-                            (123) 456-7890
-                        </address>
-                        <address>
-                            <strong>Full Name</strong><br>
-                            <a href="mailto:#">first.last@example.com</a>
-                        </address>
-                    </form>
-                </div>
-            </div>
-        </div>
+   
+        <?php
+		  
+          echo '<div class="container">';
+          echo '<div class="table-responsive custom-table-responsive">';
+          echo  ' <table class="table custom-table">';
+		  echo '<h2 class="mb-5">My Orders</h2>';
+          echo   '  <thead>';
+          echo    '   <tr>     '  ;    
+          echo       ' <th scope="col"></th>';		  
+          echo         '<th scope="col">Models</th>';
+		  echo         '<th scope="col">Screen Size</th>';
+		  echo         '<th scope="col">CPU</th>';
+		  echo         '<th scope="col">RAM</th>';
+		  echo         '<th scope="col">Camera</th>';
+		  echo         '<th scope="col">Battery</th>';
+		  echo         '<th scope="col">SAR</th>';
+		  echo         '<th scope="col">Price</th>';
+          echo       ' <th scope="col">Date Of Order</th>';
+		 
 
 
-        </div>
+          echo     ' </tr>';
+          echo   ' </thead>';
+         include('../loginCon.php');
+		 $email = $_SESSION["email"];
+         $sql = "SELECT productId,userId,date FROM eshop.orders where(userId=(select userId FROM eshop.users where email='$email'))";
+         $result = mysqli_query($con,$sql);
+		 $resultCheck = mysqli_num_rows($result);
+         if ($resultCheck > 0){
+         while ($row = mysqli_fetch_assoc($result)){
+            $productId = $row["productId"];
+            $sql1 = "SELECT * FROM eshop.mobilephones where productId = '$productId'";
+            $result1 = mysqli_query($con,$sql1);
+            $row1 = mysqli_fetch_assoc($result1);
+           echo    '<tbody>';
+           echo      '<tr scope="row">';
+		   echo        '<td>';	   
+           echo        '<div class="d-flex align-items-center credits"> <img src="', $row1['photoURL'], '" height = "100px"width="80px"></div>';
+           echo        '</td>';
+           echo        '<td>';	   
+           echo          $row1['model'];
+           echo        '</td>';
+		   echo        '<td>';	   
+           echo          $row1['screenSize'];
+           echo        '</td>';
+           echo         '<td>';
+           echo          $row1['CPU'];
+           echo          '</td>';
+		   echo         '<td>';
+           echo          $row1['RAM'];
+           echo          '</td>';
+		   echo         '<td>';
+           echo          $row1['camera'];
+           echo          '</td>';
+		   echo         '<td>';
+           echo          $row1['battery'];
+           echo          '</td>';
+		   echo         '<td>';
+           echo          $row1['SAR'];
+           echo          '</td>';
+		    echo         '<td>';
+           echo           $row1['price'],'€ ';
+           echo          '</td>';
+           echo         '<td>';
+           echo           $row['date'];
+           echo          '</td>';
+           echo       '</tr> ';
+           echo     '</tbody>';
+		 }
+         } 
+         echo   '</table>';
+         echo '</div>';
+         echo  '</div>';?>
+		 
+     
 
     </header>
     <footer class="bg-dark text-center text-white">
@@ -234,7 +237,7 @@
         </div>
         <!-- Copyright -->
     </footer>
-    <script src="main.js"></script>
+    <script src="../main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"

@@ -1,6 +1,6 @@
 <?php
 $db_user = "root";
-$db_pass = "YOUR_PASSWORD_HERE";
+$db_pass = "";
 $db_name = "eshop";
 $db_host = "localhost";
 

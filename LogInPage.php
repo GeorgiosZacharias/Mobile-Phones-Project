@@ -31,16 +31,23 @@
                 </h1>
             </div>
 
+            <?php
+            if (isset($_SESSION['login_error'])) {
+                echo '<div class="alert alert-danger" role="alert">' . $_SESSION['login_error'] . '</div>';
+                unset($_SESSION['login_error']);
+            }
+            ?>
+
             <!-- Login Form -->
             <form action="login.php" method="post">
-                <input type="text" id="email" name="email" placeholder="email">
-                <input type="password" id="password" name="password" placeholder="password">
+                <input type="text" id="email" name="email" placeholder="email" required>
+                <input type="password" id="password" name="password" placeholder="password" required>
                 <input type="submit" class="btn btn-primary btn-sm" value="Σύνδεση" />
             </form>
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <a class="underlineHover" href="Register.html">Not registered?</a>
+                <a class="underlineHover" href="Register.php">Not registered?</a>
             </div>
 
         </div>
@@ -136,7 +143,7 @@
                                 <a href="#!" class="text-white">About</a>
                             </li>
                             <li>
-                                <a href="#ContactUs.html" class="text-white">Contact us</a>
+                                <a href="pages/ContactUs.php" class="text-white">Contact us</a>
                             </li>
                             <li>
                                 <a href="#!" class="text-white">FAQ</a>

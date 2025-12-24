@@ -1,37 +1,82 @@
-<?php
-include('config.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <title>Bootstrap Tutorial Sample Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
 </head>
 
 <body>
     <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="index.php">Logo</a>
-        <?php include("navigation.php"); ?>
+        <a class="navbar-brand" href="/Project/index.php">Logo</a>
+        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <?php include("../navigation.php"); ?>
     </nav>
-
-    <header class="page-header header container-fluid">
-        <div class="overlay">
-            <div class="description">
-                <h1>Welcome to our website which provide a huge variety of mobile phones!</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum quam odio, quis placerat
-                    ante luctus eu. Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis. Suspendisse
-                    consectetur mi id libero fringilla, in pharetra sem ullamcorper.</p>
-            
+    <header class="page-header header2 container-fluid">
+        <div class="background">
+            <div class="container mt-5 mb-5">
+                <?php
+                include('../loginCon.php');
+                $limit = 6;
+                $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+                if ($page < 1) $page = 1;
+                $offset = ($page - 1) * $limit;
+                // Get total count
+                $sqlcount = "SELECT COUNT(*) as total FROM eshop.mobilephones WHERE quantity >0";
+                $result = mysqli_query($con, $sqlcount);
+                $rowcount = mysqli_fetch_assoc($result);
+                $total = $rowcount['total'];
+                $total_pages = ceil($total / $limit);
+                echo '<div class="row"><div class="col-md-12"><div class="d-flex flex-row justify-content-between align-items-center filters">';
+                echo "<h6>Βρέθηκαν $total Κινητά</h6>";
+                echo '</div></div></div>';
+                // Fetch phones for current page
+                $sqlget = "SELECT * FROM eshop.mobilephones WHERE quantity >0 LIMIT $limit OFFSET $offset";
+                $sqldata = mysqli_query($con, $sqlget);
+                echo '<div class="row mt-1">';
+                while ($row = mysqli_fetch_array($sqldata, MYSQLI_ASSOC)) {
+                    echo '<div class="col-md-4">';
+                    echo '<form action="buy.php" method="post">';
+                    echo '<div class="p-card bg-white p-2 rounded px-3">';
+                    echo '<div class="d-flex align-items-center credits"> <img src="', $row['photoURL'], '" height = "200px" width="175px"></div>';
+                    echo '<h5 class="mt-2">', $row['model'], '</h5><span class="d-block mb-5">Screen Size: ', $row['screenSize'], '
+                    <input type="hidden" name="productId" id="hiddenField" value="', $row['productId'], '"/>,
+                    <br>CPU: ', $row['CPU'], '
+                    <br>RAM: ', $row['RAM'], '
+                    <br>Camera: ', $row['camera'], '
+                    <br>Battery: ', $row['battery'], '
+                    <br>Sar: ', $row['SAR'], '
+                    <br>Quantity: ', $row['quantity'], ' pieces
+                    <br>Prize: ', $row['price'], '€ ', ',
+                    <br> <button type="sumbit" class="btn btn-warning my-3" name="add">Buy now!</button></span>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</form>';
+                }
+                echo '</div>';
+                // Pagination links
+                echo '<div class="d-flex justify-content-end text-right mt-2">';
+                echo '<nav><ul class="pagination">';
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    $active = $i == $page ? ' active' : '';
+                    echo "<li class='page-item$active'><a class='page-link' href='Phones.php?page=$i'>$i</a></li>";
+                }
+                // Next page link
+                if ($page < $total_pages) {
+                    $next = $page + 1;
+                    echo "<li class='page-item'><a class='page-link' href='Phones.php?page=$next' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
+                }
+                echo '</ul></nav>';
+                echo '</div>';
+                ?>
             </div>
         </div>
-
     </header>
     <!-- Footer -->
     <footer class="bg-dark text-center text-white">
@@ -125,7 +170,7 @@ include('config.php');
                                 <a href="#!" class="text-white">About</a>
                             </li>
                             <li>
-                                <a href="#ContactUs.html" class="text-white">Contact us</a>
+                                <a href="ContactUs.php" class="text-white">Contact us</a>
                             </li>
                             <li>
                                 <a href="#!" class="text-white">FAQ</a>
@@ -171,7 +216,7 @@ include('config.php');
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
-    <script src="main.js"></script>
+    <script src="../main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"

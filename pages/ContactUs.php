@@ -6,7 +6,7 @@
     <title>Bootstrap Tutorial Sample Page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
@@ -14,65 +14,90 @@
 
 <body>
     <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="index.php">Logo</a>
+        <a class="navbar-brand" href="/Project/index.php">Logo</a>
         <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <?php include("navigation.php"); ?>
+        <?php include("../navigation.php"); ?>
     </nav>
-
-    <header class="page-header header2 container-fluid">
-        <div class="background">
-            <div class="container mt-5 mb-5">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="d-flex flex-row justify-content-between align-items-center filters">
-                            <h6>Βρέθηκαν 24 Κινητά</h6>
-                        </div>
+    <header class="jumbotron jumbotron-sm page-header header2 container-fluid">
+        <div class="container">
+            <h1 class="h1">
+                Contact us <small>Feel free to contact us</small></h1>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="well well-sm">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">
+                                            Name</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Enter name"
+                                            required="required" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">
+                                            Email Address</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><span
+                                                    class="glyphicon glyphicon-envelope"></span>
+                                            </span>
+                                            <input type="email" class="form-control" id="email"
+                                                placeholder="Enter email" required="required" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="subject">
+                                            Subject</label>
+                                        <select id="subject" name="subject" class="form-control" required="required">
+                                            <option value="na" selected="">Choose One:</option>
+                                            <option value="service">General Customer Service</option>
+                                            <option value="suggestions">Suggestions</option>
+                                            <option value="product">Product Support</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">
+                                            Message</label>
+                                        <textarea name="message" id="message" class="form-control" rows="9" cols="25"
+                                            required="required" placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary pull-right" id="btnContactUs">
+                                        Send Message</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="row mt-1">
-                    <?php
-                    include('loginCon.php');
-                    $sqlget = "Select * from eshop.mobilephones where productId>18 and productId<25 and quantity >0";
-                    $sqldata = mysqli_query($con, $sqlget);
-                    while ($row = mysqli_fetch_array($sqldata, MYSQLI_ASSOC)) {
-                        echo '<div class="col-md-4">';
-                        echo '<form action="buy.php" method="post">';
-                        echo '<div class="p-card bg-white p-2 rounded px-3">';
-                        echo '<div class="d-flex align-items-center credits"> <img src="', $row['photoURL'], '" height = "200px"width="175px"></div>';
-                        echo '<h5 class="mt-2">', $row['model'], '</h5><span class="d-block mb-5">Screen Size: ', $row['screenSize'], '
-                        <input type="hidden" name="productId" id="hiddenField" value="',$row['productId'],'"/>,
-                        <br>CPU: ',$row['CPU'],'
-                        <br>RAM: ',$row['RAM'],'
-                        <br>Camera: ',$row['camera'],'
-                        <br>Battery: ',$row['battery'],'
-                        <br>Sar: ',$row['SAR'],'
-                        <br>Quantity: ',$row['quantity'],' pieces
-                        <br>Prize: ',$row['price'],'€ ',',
-                        <br> <button type="sumbit" class="btn btn-warning my-3" name="add">Buy now!</button></span>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '</form>';
-                    }
-                    ?>
-                </div>
-                <div class="d-flex justify-content-end text-right mt-2">
-                    <nav>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="Phones3.php" aria-label="Previous"><span
-                                        aria-hidden="true">«</span></a></li>
-                            <li class="page-item"><a class="page-link" href="Phones.php">1</a></li>
-                            <li class="page-item"><a class="page-link" href="Phones2.php">2</a></li>
-                            <li class="page-item"><a class="page-link" href="Phones3.php">3</a></li>
-                            <li class="page-item"><a class="page-link" href="Phones4.php">4</a></li>
-                        </ul>
-                    </nav>
+                <div class="col-md-4">
+                    <form>
+                        <legend><span class="glyphicon glyphicon-globe"></span> Our office</legend>
+                        <address>
+                            <strong>Twitter, Inc.</strong><br>
+                            795 Folsom Ave, Suite 600<br>
+                            San Francisco, CA 94107<br>
+                            <abbr title="Phone">
+                                P:</abbr>
+                            (123) 456-7890
+                        </address>
+                        <address>
+                            <strong>Full Name</strong><br>
+                            <a href="mailto:#">first.last@example.com</a>
+                        </address>
+                    </form>
                 </div>
             </div>
         </div>
+
+
+        </div>
+
     </header>
-    <!-- Footer -->
     <footer class="bg-dark text-center text-white">
         <!-- Grid container -->
         <div class="container p-4">
@@ -164,7 +189,7 @@
                                 <a href="#!" class="text-white">About</a>
                             </li>
                             <li>
-                                <a href="#ContactUs.html" class="text-white">Contact us</a>
+                                <a href="#ContactUs.php" class="text-white">Contact us</a>
                             </li>
                             <li>
                                 <a href="#!" class="text-white">FAQ</a>
@@ -209,8 +234,7 @@
         </div>
         <!-- Copyright -->
     </footer>
-    <!-- Footer -->
-    <script src="main.js"></script>
+    <script src="../main.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
