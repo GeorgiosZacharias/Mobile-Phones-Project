@@ -21,58 +21,60 @@
     <header class="page-header header2 container-fluid">
         <div class="background">
             <div class="container mt-5 mb-5">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="d-flex flex-row justify-content-between align-items-center filters">
-                            <?php
-                            include('../loginCon.php');
-                            $sqlcount = "SELECT COUNT(*) as total FROM eshop.mobilephones WHERE productId<7 and quantity >0";
-                            $result = mysqli_query($con, $sqlcount);
-                            $rowcount = mysqli_fetch_assoc($result);
-                            $total = $rowcount['total'];
-                            echo "<h6>Βρέθηκαν $total Κινητά</h6>";
-                            ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-1">
-                    <?php
-                    include('../loginCon.php');
-                    $sqlget = "Select * from eshop.mobilephones where productId<7 and quantity >0";
-                    $sqldata = mysqli_query($con, $sqlget);
-                    while ($row = mysqli_fetch_array($sqldata, MYSQLI_ASSOC)) {
-                        echo '<div class="col-md-4">';
-                        echo '<form action="buy.php" method="post">';
-                        echo '<div class="p-card bg-white p-2 rounded px-3">';
-                        echo '<div class="d-flex align-items-center credits"> <img src="', $row['photoURL'], '" height = "200px"width="175px"></div>';
-                        echo '<h5 class="mt-2">', $row['model'], '</h5><span class="d-block mb-5">Screen Size: ', $row['screenSize'], '
-                        <input type="hidden" name="productId" id="hiddenField" value="', $row['productId'], '"/>,
-                        <br>CPU: ', $row['CPU'], '
-                        <br>RAM: ', $row['RAM'], '
-                        <br>Camera: ', $row['camera'], '
-                        <br>Battery: ', $row['battery'], '
-                        <br>Sar: ', $row['SAR'], '
-                        <br>Quantity: ', $row['quantity'], ' pieces
-                        <br>Prize: ', $row['price'], '€ ', ',
-                        <br> <button type="sumbit" class="btn btn-warning my-3" name="add">Buy now!</button></span>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '</form>';
-                    }
-                    ?>
-                </div>
-                <div class="d-flex justify-content-end text-right mt-2">
-                    <nav>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="Phones.php">1</a></li>
-                            <li class="page-item"><a class="page-link" href="Phones2.php">2</a></li>
-                            <li class="page-item"><a class="page-link" href="Phones3.php">3</a></li>
-                            <li class="page-item"><a class="page-link" href="Phones4.php">4</a></li>
-                            <li class="page-item"><a class="page-link" href="Phones2.php" aria-label="Next"><span
-                                        aria-hidden="true">»</span></a></li>
-                        </ul>
-                    </nav>
-                </div>
+                <?php
+                include('../loginCon.php');
+                $limit = 6;
+                $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+                if ($page < 1) $page = 1;
+                $offset = ($page - 1) * $limit;
+                // Get total count
+                $sqlcount = "SELECT COUNT(*) as total FROM eshop.mobilephones WHERE quantity >0";
+                $result = mysqli_query($con, $sqlcount);
+                $rowcount = mysqli_fetch_assoc($result);
+                $total = $rowcount['total'];
+                $total_pages = ceil($total / $limit);
+                echo '<div class="row"><div class="col-md-12"><div class="d-flex flex-row justify-content-between align-items-center filters">';
+                echo "<h6>Βρέθηκαν $total Κινητά</h6>";
+                echo '</div></div></div>';
+                // Fetch phones for current page
+                $sqlget = "SELECT * FROM eshop.mobilephones WHERE quantity >0 LIMIT $limit OFFSET $offset";
+                $sqldata = mysqli_query($con, $sqlget);
+                echo '<div class="row mt-1">';
+                while ($row = mysqli_fetch_array($sqldata, MYSQLI_ASSOC)) {
+                    echo '<div class="col-md-4">';
+                    echo '<form action="buy.php" method="post">';
+                    echo '<div class="p-card bg-white p-2 rounded px-3">';
+                    echo '<div class="d-flex align-items-center credits"> <img src="', $row['photoURL'], '" height = "200px" width="175px"></div>';
+                    echo '<h5 class="mt-2">', $row['model'], '</h5><span class="d-block mb-5">Screen Size: ', $row['screenSize'], '
+                    <input type="hidden" name="productId" id="hiddenField" value="', $row['productId'], '"/>,
+                    <br>CPU: ', $row['CPU'], '
+                    <br>RAM: ', $row['RAM'], '
+                    <br>Camera: ', $row['camera'], '
+                    <br>Battery: ', $row['battery'], '
+                    <br>Sar: ', $row['SAR'], '
+                    <br>Quantity: ', $row['quantity'], ' pieces
+                    <br>Prize: ', $row['price'], '€ ', ',
+                    <br> <button type="sumbit" class="btn btn-warning my-3" name="add">Buy now!</button></span>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</form>';
+                }
+                echo '</div>';
+                // Pagination links
+                echo '<div class="d-flex justify-content-end text-right mt-2">';
+                echo '<nav><ul class="pagination">';
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    $active = $i == $page ? ' active' : '';
+                    echo "<li class='page-item$active'><a class='page-link' href='Phones.php?page=$i'>$i</a></li>";
+                }
+                // Next page link
+                if ($page < $total_pages) {
+                    $next = $page + 1;
+                    echo "<li class='page-item'><a class='page-link' href='Phones.php?page=$next' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
+                }
+                echo '</ul></nav>';
+                echo '</div>';
+                ?>
             </div>
         </div>
     </header>
