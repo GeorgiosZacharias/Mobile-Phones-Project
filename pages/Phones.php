@@ -24,35 +24,42 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="d-flex flex-row justify-content-between align-items-center filters">
-                            <h6>Βρέθηκαν 24 Κινητά</h6>
+                            <?php
+                            include('../loginCon.php');
+                            $sqlcount = "SELECT COUNT(*) as total FROM eshop.mobilephones WHERE productId<7 and quantity >0";
+                            $result = mysqli_query($con, $sqlcount);
+                            $rowcount = mysqli_fetch_assoc($result);
+                            $total = $rowcount['total'];
+                            echo "<h6>Βρέθηκαν $total Κινητά</h6>";
+                            ?>
                         </div>
                     </div>
                 </div>
                 <div class="row mt-1">
                     <?php
-          include('../loginCon.php');
-          $sqlget = "Select * from eshop.mobilephones where productId<7 and quantity >0";
-          $sqldata = mysqli_query($con, $sqlget);
-          while ($row = mysqli_fetch_array($sqldata, MYSQLI_ASSOC)) {
-            echo '<div class="col-md-4">';
+                    include('../loginCon.php');
+                    $sqlget = "Select * from eshop.mobilephones where productId<7 and quantity >0";
+                    $sqldata = mysqli_query($con, $sqlget);
+                    while ($row = mysqli_fetch_array($sqldata, MYSQLI_ASSOC)) {
+                        echo '<div class="col-md-4">';
                         echo '<form action="buy.php" method="post">';
                         echo '<div class="p-card bg-white p-2 rounded px-3">';
                         echo '<div class="d-flex align-items-center credits"> <img src="', $row['photoURL'], '" height = "200px"width="175px"></div>';
                         echo '<h5 class="mt-2">', $row['model'], '</h5><span class="d-block mb-5">Screen Size: ', $row['screenSize'], '
-                        <input type="hidden" name="productId" id="hiddenField" value="',$row['productId'],'"/>,
-                        <br>CPU: ',$row['CPU'],'
-                        <br>RAM: ',$row['RAM'],'
-                        <br>Camera: ',$row['camera'],'
-                        <br>Battery: ',$row['battery'],'
-                        <br>Sar: ',$row['SAR'],'
-                        <br>Quantity: ',$row['quantity'],' pieces
-                        <br>Prize: ',$row['price'],'€ ',',
+                        <input type="hidden" name="productId" id="hiddenField" value="', $row['productId'], '"/>,
+                        <br>CPU: ', $row['CPU'], '
+                        <br>RAM: ', $row['RAM'], '
+                        <br>Camera: ', $row['camera'], '
+                        <br>Battery: ', $row['battery'], '
+                        <br>Sar: ', $row['SAR'], '
+                        <br>Quantity: ', $row['quantity'], ' pieces
+                        <br>Prize: ', $row['price'], '€ ', ',
                         <br> <button type="sumbit" class="btn btn-warning my-3" name="add">Buy now!</button></span>';
                         echo '</div>';
                         echo '</div>';
                         echo '</form>';
-          }
-          ?>
+                    }
+                    ?>
                 </div>
                 <div class="d-flex justify-content-end text-right mt-2">
                     <nav>
